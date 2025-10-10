@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../utils/requesSlice";
+import { addRequests } from "../utils/requestSlice";
 import { toast } from "react-toastify";
 import { API_BASE_URL } from "../../config/api";
 import { authUtils } from "../../utils/auth";
