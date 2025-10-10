@@ -7,16 +7,16 @@ const About = () => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-4">
-            About DevMeet
+            About FanMeet
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Connecting developers worldwide through meaningful professional relationships
+            Connecting fans of discrete fandoms across the world through a seamless and engaging platform.
           </p>
         </div>
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
-          {/* About DevMeet */}
+          {/* About FanMeet */}
           <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-xl">
             <div className="flex items-center mb-6">
               <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-xl mr-4">
@@ -24,41 +24,38 @@ const About = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold text-white">What is DevMeet?</h2>
+              <h2 className="text-3xl font-bold text-white">What is FanMeet?</h2>
             </div>
             <div className="space-y-4 text-gray-300">
               <p>
-                <strong className="text-blue-400">DevMeet</strong> is a professional networking platform specifically designed for developers, 
-                engineers, and tech professionals. Our mission is to create meaningful connections that foster 
-                collaboration, knowledge sharing, and career growth in the tech industry.
+                <strong className="text-blue-400">FanMeet</strong> is a social platform specifically designed for fans of various fandoms. 
+                Our mission is to create a vibrant community where fans can connect, share, and engage with each other.
               </p>
               <p>
-                Whether you're a seasoned developer looking to mentor others, a junior developer seeking guidance, 
-                or someone looking to build your professional network, DevMeet provides the perfect platform to 
-                connect with like-minded individuals.
+                Whether you're a passionate fan eager to share your love, a newcomer exploring new fandoms, or someone looking to connect across different fan communities, FanMeet is the perfect platform to unite fans from every world of fandom.
               </p>
               <div className="mt-6">
                 <h3 className="text-xl font-semibold text-white mb-3">Key Features:</h3>
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <span className="text-green-400 mr-2">✓</span>
-                    Professional developer profiles
+                    Create and customize fan profiles
                   </li>
                   <li className="flex items-center">
                     <span className="text-green-400 mr-2">✓</span>
-                    Real-time messaging and chat
+                    Join fandom-specific chat rooms
                   </li>
                   <li className="flex items-center">
                     <span className="text-green-400 mr-2">✓</span>
-                    Connection requests and networking
+                    Discover and connect with fans across different fandoms
                   </li>
                   <li className="flex items-center">
                     <span className="text-green-400 mr-2">✓</span>
-                    Skill-based matching system
+                    Share posts, art, and fan theories in community feeds
                   </li>
                   <li className="flex items-center">
                     <span className="text-green-400 mr-2">✓</span>
-                    Tech community feed and updates
+                    Fandom-specific events, meetups and updates
                   </li>
                 </ul>
               </div>
@@ -77,13 +74,13 @@ const About = () => {
             </div>
             <div className="space-y-4 text-gray-300">
               <p>
-                Hi! I'm <strong className="text-green-400">Balram Prajapati</strong>, a passionate full-stack developer 
-                who believes in the power of community and collaboration in the tech world.
+                Hi! I'm <strong className="text-green-400">Anushree Janoriya</strong>, a passionate full-stack developer 
+                who believes in the power of community and collaboration in the tech world as well as the fandom universe.
               </p>
               <p>
                 With expertise in modern web technologies including React, Node.js, and various database systems, 
-                I created DevMeet to address the need for a dedicated platform where developers can connect, 
-                share knowledge, and grow together professionally.
+                I created FanMeet to address the need for a dedicated platform where fans can connect, 
+                share knowledge, and grow together in their fandom experiences.
               </p>
               <div className="mt-6">
                 <h3 className="text-xl font-semibold text-white mb-3">Technical Skills:</h3>
@@ -97,8 +94,8 @@ const About = () => {
               </div>
               <div className="mt-6">
                 <p className="text-sm text-gray-400">
-                  "Building DevMeet has been an incredible journey of learning and growth. I'm excited to see 
-                  how this platform helps developers connect and create amazing things together!"
+                  "Building FanMeet has been an incredible journey of learning and growth. I'm excited to see 
+                  how this platform helps fans connect and create amazing things together!"
                 </p>
               </div>
             </div>
@@ -119,8 +116,8 @@ const About = () => {
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Mission</h3>
               <p className="text-gray-300">
-                To create a thriving ecosystem where developers can easily connect, collaborate, and accelerate 
-                their professional growth through meaningful relationships and knowledge exchange.
+                To create a thriving ecosystem where fans can easily connect, collaborate, and accelerate 
+                their growth through meaningful relationships and knowledge exchange.
               </p>
             </div>
             <div className="text-center">
@@ -132,8 +129,8 @@ const About = () => {
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Vision</h3>
               <p className="text-gray-300">
-                To become the go-to platform for tech professionals worldwide, fostering innovation and 
-                collaboration that drives the future of technology and software development.
+                To become the go-to platform for fans worldwide, fostering innovation and 
+                collaboration that drives the future of fandom experiences.
               </p>
             </div>
           </div>
@@ -160,13 +157,13 @@ const About = () => {
                 For any questions, suggestions, or technical support, feel free to reach out:
               </p>
               <a 
-                href="mailto:balramprajapati@example.com?subject=DevMeet Support - Feedback/Suggestion&body=Hi Balram,%0A%0AI wanted to reach out regarding DevMeet:%0A%0A[Please describe your feedback, suggestion, or issue here]%0A%0AThanks for creating this amazing platform!%0A%0ABest regards,"
+                href="mailto:anushreejanoriya@example.com?subject=FanMeet Support - Feedback/Suggestion&body=Hi Anushree,%0A%0AI wanted to reach out regarding FanMeet:%0A%0A[Please describe your feedback, suggestion, or issue here]%0A%0AThanks for creating this amazing platform!%0A%0ABest regards,"
                 className="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                Email: balramprajapati@example.com
+                Email: anushreejanoriya@example.com
               </a>
             </div>
             
@@ -190,8 +187,8 @@ const About = () => {
         {/* Footer Note */}
         <div className="text-center mt-12 pt-8 border-t border-gray-700/50">
           <p className="text-gray-400">
-            Built with ❤️ by Balram Prajapati | DevMeet © 2025 | 
-            <span className="text-blue-400"> Connecting Developers Worldwide</span>
+            Built with ❤️ by Anushree Janoriya | FanMeet © 2025 | 
+            <span className="text-blue-400"> Connecting Fans Worldwide</span>
           </p>
         </div>
       </div>
