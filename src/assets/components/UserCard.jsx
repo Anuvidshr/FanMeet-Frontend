@@ -26,7 +26,7 @@ const UserCard = ({ user }) => {
     );
   }
 
-  const { _id,firstname, lastname, photoUrl, age, gender, about,skills } = user;
+  const { _id,firstname, lastname, photoUrl, age, gender, about, interests } = user;
   const dispatch =useDispatch();
 
   const handleSendRequest= async(status, userId)=>{

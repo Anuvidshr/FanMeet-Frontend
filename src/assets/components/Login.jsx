@@ -22,7 +22,7 @@ const Login = () => {
     lastname: "",
     email: "",
     password: "",
-    skills: []
+    interests: []
   });
 
   const dispatch = useDispatch();
@@ -145,16 +145,16 @@ const Login = () => {
             <div className="flex items-center justify-center gap-2 mb-1">
               <span className="text-2xl">🌟</span>
               <h3 className="font-bold text-lg bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Hey Developer!
+                Yo, Fan Explorer!
               </h3>
               <span className="text-2xl">🚀</span>
             </div>
             
             <p className="text-blue-300 text-xs font-semibold mt-1">
-              Let's connect and grow together! 🤝
+              Let's meet, share, and celebrate fandoms together! 🤝
             </p>
             <p className="text-purple-300 text-xs font-bold mt-1 animate-pulse">
-              Hurry up - Join thousands of developers! ⚡
+              Hurry up - Join thousands of fans who share your passions! ⚡
             </p>
             <div className="flex justify-center gap-2 mt-2">
               <span className="inline-block w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
@@ -253,7 +253,7 @@ const Login = () => {
           </a>
 
           <p className="mobile-toggle">
-            Don’t have an account?{" "}
+            Don't have an account?{" "}
             <span onClick={() => setIsSignUp(true)}>Sign Up</span>
           </p>
 
@@ -276,8 +276,8 @@ const Login = () => {
             </button>
           </div>
           <div className="overlay-panel overlay-right">
-            <h1>Hello, Developer! 😎</h1>
-            <p>Join our community of developers and start your learning journey with us!</p>
+            <h1>Hello, Dost! 😎</h1>
+            <p>Join our community of fans and start your thrill!</p>
             <button
               className="ghost"
               onClick={() => setIsSignUp(true)}

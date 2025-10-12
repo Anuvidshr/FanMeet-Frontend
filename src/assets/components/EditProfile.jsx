@@ -17,7 +17,7 @@ const EditProfile = () => {
     age: "",
     gender: "",
     about: "",
-    skills: "",
+    interests: "",
     photoUrl: "",
   });
 
@@ -48,7 +48,7 @@ const EditProfile = () => {
           age: user.age || "",
           gender: user.gender || "",
           about: user.about || "",
-          skills: user.skills?.join(", ") || "",
+          interests: user.interests?.join(", ") || "",
           photoUrl: user.photoUrl || "",
         });
         setLoading(false);
@@ -76,7 +76,7 @@ const EditProfile = () => {
     
     const updatedData = {
       ...formData,
-      skills: formData.skills.split(",").map((s) => s.trim()),
+      interests: formData.interests.split(",").map((s) => s.trim()),
     };
     
     console.log("Processed data for API:", updatedData);
@@ -104,7 +104,7 @@ const EditProfile = () => {
         age: updatedUser.age || "",
         gender: updatedUser.gender || "",
         about: updatedUser.about || "",
-        skills: updatedUser.skills?.join(", ") || "",
+        interests: updatedUser.interests?.join(", ") || "",
         photoUrl: updatedUser.photoUrl || "",
       });
       dispatch(addUser(updatedUser));
@@ -209,10 +209,10 @@ const EditProfile = () => {
 
           <input 
             type="text" 
-            name="skills" 
-            value={formData.skills} 
+            name="interests" 
+            value={formData.interests} 
             onChange={handleChange} 
-            placeholder="skills (comma-separated)" 
+            placeholder="interests (comma-separated)" 
             style={styles.input}
             onFocus={(e) => e.target.style.borderColor = '#8b5cf6'}
             onBlur={(e) => e.target.style.borderColor = '#374151'}
@@ -262,7 +262,7 @@ const EditProfile = () => {
             age: formData.age,
             gender: formData.gender,
             about: formData.about,
-            skills: formData.skills.split(",").map((s) => s.trim()).filter(Boolean)
+            interests: formData.interests.split(",").map((s) => s.trim()).filter(Boolean)
           }} />
         </div>
       </div>

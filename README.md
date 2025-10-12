@@ -80,10 +80,10 @@ Body
         Frontend = http://43.204.96.49/
         Backend = http://43.204.96.49:7777/
     
-        Domain name = Devmeet.com => 43.204.96.49
+        Domain name = Fanmeet.com => 43.204.96.49
 
-        Frontend = DevMeet-Backend.com
-        Backend = DevMeet-Backend.com:7777 => DevMeet-Backend.com/api
+        Frontend = FanMeet-Backend.com
+        Backend = FanMeet-Backend.com:7777 => FanMeet-Backend.com/api
 
         nginx config : 
 
