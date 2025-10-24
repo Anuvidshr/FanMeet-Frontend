@@ -1,4 +1,5 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import React from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import NavBar from "./NavBar"
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,12 @@ import { authUtils } from "../../utils/auth";
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const userData = useSelector((store) => store.user);
+
+  // Define public routes that don't require authentication
+  const publicRoutes = ['/', '/login', '/explore'];
+  const isPublicRoute = publicRoutes.includes(location.pathname) || location.pathname.startsWith('/fandom');
 
   const fetchUser = async () => {
     try {
@@ -23,7 +29,10 @@ const Body = () => {
       
     } catch (err) {
       if (err.status === 401) {
-        navigate("/login");
+        // Only redirect to login if NOT on a public route
+        if (!isPublicRoute) {
+          navigate("/login");
+        }
       }
       console.log(err);
     }
@@ -47,3 +56,4 @@ const Body = () => {
 }
 
 export default Body;
+

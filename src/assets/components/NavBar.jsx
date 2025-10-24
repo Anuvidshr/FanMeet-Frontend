@@ -40,7 +40,7 @@ const NavBar = () => {
     <>
      <div className="navbar bg-gray-800/90 backdrop-blur-sm border-b border-gray-700/50 shadow-lg mx-auto relative z-[10000]">
   <div className={`flex-1 sm:flex-1 flex ${isLoginPage ? 'justify-center sm:justify-center' : 'justify-start sm:justify-start'}`}>
-     <a href="/login" className="group relative flex items-center space-x-2 py-2 px-4 rounded-2xl bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-cyan-500/20 backdrop-blur-lg border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25">
+     <a href="/" className="group relative flex items-center space-x-2 py-2 px-4 rounded-2xl bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-cyan-500/20 backdrop-blur-lg border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25">
        
       
        
@@ -92,14 +92,12 @@ const NavBar = () => {
         <ul
           tabIndex={0}
           className="menu menu-sm dropdown-content bg-gray-800/95 backdrop-blur-sm rounded-2xl z-[10001] mt-3 w-56 p-3 shadow-2xl border border-gray-700/50">
-          <li>
-            <a href="/Profile" className="justify-between text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">
-              👤Update-Profile
-              <span className="badge bg-gradient-to-r from-green-400 to-blue-500 text-white border-none">New</span>
-            </a>
-          </li>
+          <li><a href="/" className="text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">🏠 Homepage</a></li>
+          <li><a href="/explore" className="text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">🔮 Explore</a></li>
+          <li><a href="/fantweet" className="text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">💬 FanTweet</a></li>
           <li><a href="/connection" className="text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">🤝 Connection</a></li>
           <li><a href="/request" className="text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">🚀 Requests</a></li>
+          <li><a href="/settings" className="text-white hover:bg-gray-700/70 rounded-xl px-4 py-2">⚙️ Settings</a></li>
           <li><a onClick={handleLogout} className="text-white hover:bg-red-500/20 hover:text-red-400 rounded-xl px-4 py-2">🚪 Logout</a></li>
         </ul>
       </div>
