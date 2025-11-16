@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import Store from "./assets/utils/Store";
 import Body from "./assets/components/Body";
@@ -41,29 +41,29 @@ function App(){
       <ThemeProvider>
       <BrowserRouter basename="/">
        <Routes>
-          <Route path="/" element={<Body/>}>   
-              <Route index element={<Homepage/>}/>
-              <Route path="/login" element={<Login/>}/>
-              <Route path="Profile" element={<Profile/> }/>
-              <Route path="homepage" element={<Homepage/> }/>
-              <Route path="feed" element={<Feed/> }/>
-              <Route path="explore" element={<Explore/> }/>
-              <Route path="fantweet" element={<FanTweet/> }/>
-              <Route path="settings" element={<Settings/> }/>
-              <Route path="Connection" element={<Connection/> }/>
-              <Route path="Request" element={<Request/>}/>
-              <Route path="Chat/:toUserId" element={<Chat/>}/>
-              <Route path="about" element={<About/>}/>
-              <Route path="fandom/a" element={<Hp/>}/>
-              <Route path="fandom/f" element={<Cricket/>}/>
-              <Route path="/notifications" element={
-                <PrivateRoute>
-                  <Notifications />
-                </PrivateRoute>
-              } />
-
-          </Route>
-       </Routes>
+          {/* ensure deployed root goes to Homepage */}
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="Profile" element={<Profile/> }/>
+          <Route path="homepage" element={<Homepage/> }/>
+          <Route path="feed" element={<Feed/> }/>
+          <Route path="explore" element={<Explore/> }/>
+          <Route path="fantweet" element={<FanTweet/> }/>
+          <Route path="settings" element={<Settings/> }/>
+          <Route path="Connection" element={<Connection/> }/>
+          <Route path="Request" element={<Request/>}/>
+          <Route path="Chat/:toUserId" element={<Chat/>}/>
+          <Route path="about" element={<About/>}/>
+          <Route path="fandom/a" element={<Hp/>}/>
+          <Route path="fandom/f" element={<Cricket/>}/>
+          <Route path="/notifications" element={
+            <PrivateRoute>
+              <Notifications />
+            </PrivateRoute>
+          } />
+          {/* catch-all: redirect unknown URLs to homepage */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
       </BrowserRouter>
       </ThemeProvider>
       </Provider>
