@@ -1,59 +1,21 @@
 import React from "react";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import NavBar from "./NavBar"
+import { Outlet } from "react-router-dom";
+import NavBar from "./NavBar";
 import Footer from "./Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../utils/userSlice";
-import axios from "axios";
-import { useEffect } from "react";
-import { API_BASE_URL } from "../../config/api";
-import { authUtils } from "../../utils/auth";
+import Feed from "./Feed";
 
 const Body = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const userData = useSelector((store) => store.user);
-
-  // Define public routes that don't require authentication
-  const publicRoutes = ['/', '/login', '/explore'];
-  const isPublicRoute = publicRoutes.includes(location.pathname) || location.pathname.startsWith('/fandom');
-
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get(`${API_BASE_URL}/profile/view`, {
-        withCredentials: true,
-        headers: authUtils.getAuthHeaders()
-      });
-      dispatch(addUser(res.data));
-      
-    } catch (err) {
-      if (err.status === 401) {
-        // Only redirect to login if NOT on a public route
-        if (!isPublicRoute) {
-          navigate("/login");
-        }
-      }
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    if (!userData) {
-      fetchUser();
-    }
-  }, []); 
-
   return (
- <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
-  <NavBar/>
-  <div style={{ overflowX: 'hidden' }}> 
-    <Outlet/>
-  </div>
-  <Footer/>
- </div>
-  )
-}
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+      <div className="flex-grow">
+        <Outlet />
+        <Feed />
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
 export default Body;
 
