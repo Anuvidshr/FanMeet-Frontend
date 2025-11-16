@@ -43,6 +43,27 @@ const Settings = () => {
     setAppearance(prev => ({ ...prev, [key]: value }));
   };
 
+  const themes = [
+    { 
+      id: 'light', 
+      name: 'Light Mode', 
+      icon: '☀️',
+      preview: 'bg-gradient-to-br from-green-300 via-purple-200 to-pink-200'
+    },
+    { 
+      id: 'dark', 
+      name: 'Dark Mode', 
+      icon: '🌙',
+      preview: 'bg-gradient-to-br from-gray-950 via-purple-950 to-black'
+    },
+    { 
+      id: 'harryPotter', 
+      name: 'Harry Potter', 
+      icon: '⚡',
+      preview: 'bg-gradient-to-br from-[#740001] via-[#372e29] to-[#1a472a]'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-6">
       <div className="max-w-6xl mx-auto px-4">
@@ -332,38 +353,30 @@ const Settings = () => {
                     {/* Theme */}
                     <div>
                       <label className="text-white font-medium mb-3 block">Theme</label>
-                      <div className="grid grid-cols-2 gap-4">
-                        <button
-                          onClick={() => setThemeMode('light')}
-                          className={`p-6 rounded-lg border-2 transition-all ${
-                            theme === 'light'
-                              ? 'border-blue-500 bg-blue-500/10 scale-105'
-                              : 'border-gray-700 bg-white/5 hover:bg-white/10'
-                          }`}
-                        >
-                          <div className="text-5xl mb-3">☀️</div>
-                          <div className="text-white font-medium text-lg">Light Mode</div>
-                          <p className="text-gray-400 text-xs mt-2">Bright & clean interface</p>
-                        </button>
-                        
-                        <button
-                          onClick={() => setThemeMode('dark')}
-                          className={`p-6 rounded-lg border-2 transition-all ${
-                            theme === 'dark'
-                              ? 'border-blue-500 bg-blue-500/10 scale-105'
-                              : 'border-gray-700 bg-white/5 hover:bg-white/10'
-                          }`}
-                        >
-                          <div className="text-5xl mb-3">🌙</div>
-                          <div className="text-white font-medium text-lg">Dark Mode</div>
-                          <p className="text-gray-400 text-xs mt-2">Easy on the eyes</p>
-                        </button>
-                      </div>
-                      <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-                        <p className="text-blue-300 text-sm flex items-center gap-2">
-                          <span>ℹ️</span>
-                          <span>Current theme: <strong>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</strong></span>
-                        </p>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {themes.map(({ id, name, icon, preview }) => (
+                          <button
+                            key={id}
+                            onClick={() => setThemeMode(id)}
+                            className={`relative group rounded-xl p-4 transition-all duration-300 ${
+                              theme === id 
+                                ? 'ring-2 ring-purple-500 ring-offset-2 ring-offset-gray-900' 
+                                : 'hover:ring-2 hover:ring-purple-500/50 hover:ring-offset-2 hover:ring-offset-gray-900'
+                            }`}
+                          >
+                            <div className={`h-24 rounded-lg mb-4 ${preview}`}></div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-white font-medium">{name}</span>
+                              <span className="text-2xl">{icon}</span>
+                            </div>
+                            {theme === id && (
+                              <div className="absolute -top-2 -right-2 bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center">
+                                ✓
+                              </div>
+                            )}
+                            <div className="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                          </button>
+                        ))}
                       </div>
                     </div>
 

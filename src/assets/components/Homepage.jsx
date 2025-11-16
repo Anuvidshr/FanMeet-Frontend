@@ -73,7 +73,7 @@ const Homepage = () => {
           this.twinkleDirection *= -1;
         }
       }
-
+      //star drawing
       draw() {
         // Draw star with subtle glow
         ctx.shadowBlur = 8;
@@ -120,7 +120,8 @@ const Homepage = () => {
       card: "bg-white/10",
       cardHover: "hover:bg-white/15",
       button: "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500",
-      buttonSecondary: "bg-white/10 hover:bg-white/20"
+      buttonSecondary: "bg-white/10 hover:bg-white/20",
+      heading: "bg-gradient-to-r from-blue-400 via-yellow-200 to-red-400 bg-clip-text text-transparent"
     },
     light: {
       background: "bg-gradient-to-br from-green-300 via-purple-200 to-pink-200",
@@ -129,7 +130,18 @@ const Homepage = () => {
       card: "bg-white/80 shadow-lg",
       cardHover: "hover:bg-white",
       button: "bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600",
-      buttonSecondary: "bg-white/80 hover:bg-white shadow-md"
+      buttonSecondary: "bg-white/80 hover:bg-white shadow-md",
+      heading: "bg-gradient-to-r from-purple-700 via-purple-900 to-indigo-900 bg-clip-text text-transparent"
+    },
+    harryPotter: {
+      background: "bg-gradient-to-br from-[#740001] via-[#372e29] to-[#1a472a]",
+      text: "text-[#d3a625]",
+      subtext: "text-[#eeba30]",
+      card: "bg-[#2a2a2a]/80 border-[#d3a625]",
+      cardHover: "hover:bg-[#2a2a2a]/90",
+      button: "bg-gradient-to-r from-[#740001] to-[#1a472a] hover:from-[#8b0001] hover:to-[#2a573a]",
+      buttonSecondary: "bg-[#d3a625]/90 hover:bg-[#d3a625]",
+      heading: "bg-gradient-to-r from-[#ffd700] via-[#d3a625] to-[#eeba30] bg-clip-text text-transparent"
     }
   };
 
@@ -137,7 +149,7 @@ const Homepage = () => {
 
   return (
     <div className={`min-h-screen ${currentTheme.background} relative overflow-hidden`}>
-      {/* Animated Canvas Background - only visible in dark mode */}
+      {/* Show animated canvas only in dark mode */}
       {theme === 'dark' && (
         <canvas
           ref={canvasRef}
@@ -145,11 +157,26 @@ const Homepage = () => {
         />
       )}
 
+      {/* Add floating elements for Harry Potter theme */}
+      {theme === 'harryPotter' && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-12 h-12 animate-float-slow" style={{ top: '10%', left: '5%' }}>
+            ⚡
+          </div>
+          <div className="absolute w-12 h-12 animate-float-slower" style={{ top: '30%', right: '10%' }}>
+            🦉
+          </div>
+          <div className="absolute w-12 h-12 animate-float-slowest" style={{ bottom: '20%', left: '15%' }}>
+            🪄
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 py-16 relative z-10">
         {/* Hero Section */}
         <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-6 animate-pulse-slow">
-            Welcome to FanMeet
+          <h1 className={`text-6xl md:text-8xl font-bold ${currentTheme.heading} mb-6 animate-pulse-slow`}>
+            చҽӀçօʍҽ էօ ƑąղⱮҽҽէ
           </h1>
           <p className={`text-xl md:text-2xl ${currentTheme.subtext} mb-8 max-w-3xl mx-auto animate-slide-up`}>
             Connect with fellow fans, explore your favorite fandoms, and make meaningful connections
@@ -256,6 +283,21 @@ const Homepage = () => {
           50% { transform: translateY(-5px); }
         }
 
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes float-slower {
+          0%, 100% { transform: translateY(0) rotate(-5deg); }
+          50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        @keyframes float-slowest {
+          0%, 100% { transform: translateY(0) rotate(5deg); }
+          50% { transform: translateY(-25px) rotate(-5deg); }
+        }
+
         .animate-fade-in {
           animation: fade-in 1s ease-out;
         }
@@ -275,6 +317,18 @@ const Homepage = () => {
 
         .animate-bounce-slow {
           animation: bounce-slow 2s ease-in-out infinite;
+        }
+
+        .animate-float-slow {
+          animation: float-slow 4s ease-in-out infinite;
+        }
+
+        .animate-float-slower {
+          animation: float-slower 6s ease-in-out infinite;
+        }
+
+        .animate-float-slowest {
+          animation: float-slowest 8s ease-in-out infinite;
         }
       `}</style>
     </div>
