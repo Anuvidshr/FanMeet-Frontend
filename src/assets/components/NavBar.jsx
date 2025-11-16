@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../utils/userSlice";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect } from "react"; // { added import }
 import { toast } from "react-toastify";
 import { API_BASE_URL } from "../../config/api";
@@ -68,7 +68,7 @@ const NavBar = () => {
   {/* Left Section: Logo */}
   <div className="flex-0">
      {/* FanMeet Logo - NO BOX */}
-     <a href="/" title="Go to Login Page" className="group relative flex items-center space-x-2 transition-all duration-300 hover:scale-110">
+     <Link to="/" title="Go to Login Page" className="group relative flex items-center space-x-2 transition-all duration-300 hover:scale-110">
        
        {/* Logo Text with Cursive Styling */}
        <div className="relative">
@@ -99,7 +99,7 @@ const NavBar = () => {
        <div className="text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
          🌟
        </div>
-     </a>
+     </Link>
   </div>
   
   {/* Center Section: Navigation Icons */}
@@ -107,40 +107,24 @@ const NavBar = () => {
     {user && !isLoginPage && (
       <div className="hidden md:flex items-center gap-8">
         {/* Homepage Icon */}
-        <a 
-          href="/" 
-          title="Homepage"
-          className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg"
-        >
+        <Link to="/" title="Homepage" className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg">
           <span className="group-hover:animate-bounce">Home</span>
-        </a>
+        </Link>
         
         {/* Explore Icon */}
-        <a 
-          href="/explore" 
-          title="Explore"
-          className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg"
-        >
+        <Link to="/explore" title="Explore" className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg">
           <span className="group-hover:animate-bounce">Explore</span>
-        </a>
+        </Link>
         
         {/* FanTweet Icon */}
-        <a 
-          href="/fantweet" 
-          title="FanTweet"
-          className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg"
-        >
+        <Link to="/fantweet" title="FanTweet" className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg">
           <span className="group-hover:animate-bounce">FanTweet</span>
-        </a>
+        </Link>
 
         {/* Connection Icon */}
-        <a 
-          href="/connection" 
-          title="Your Connections"
-          className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg"
-        >
+        <Link to="/connection" title="Your Connections" className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg">
           <span className="group-hover:animate-bounce">Connections</span>
-        </a>
+        </Link>
       </div>
     )}
   </div>
@@ -170,24 +154,24 @@ const NavBar = () => {
         <ul
           tabIndex={0}
           className={`menu menu-sm dropdown-content rounded-2xl z-[10001] mt-3 w-56 p-3 shadow-2xl border ${theme === 'light' ? 'bg-green-100/95 border-green-300/50 backdrop-blur-sm' : 'bg-gray-800/95 backdrop-blur-sm border-gray-700/50'}`}>
-          <li><a href="/" title="Homepage" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🏠 Homepage</a></li>
-          <li><a href="/explore" title="Explore FanMeet" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔍 Explore</a></li>
-          <li><a href="/fantweet" title="View FanTweets" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>💬 FanTweet</a></li>
-          <li><a href="/connection" title="Your Connections" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🤝 Connection</a></li>
-          <li><a href="/notifications" title="Your Notifications" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔔 Notifications</a></li>
-          <li><a href="/settings" title="Account Settings" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>⚙️ Settings</a></li>
-          <li><a onClick={handleLogout} title="Sign Out" className={`rounded-xl px-4 py-2 cursor-pointer ${theme === 'light' ? 'text-gray-800 hover:bg-red-200/50' : 'text-white hover:bg-red-500/20 hover:text-red-400'}`}>🚪 Logout</a></li>
-        </ul>
-      </div>
-    ) : (
-      <div className="flex gap-2">
-       
-      </div>
-    )}
-  </div>
-</div>
-
-<style jsx>{`
+          <li><Link to="/" title="Homepage" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🏠 Homepage</Link></li>
+          <li><Link to="/explore" title="Explore FanMeet" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔍 Explore</Link></li>
+          <li><Link to="/fantweet" title="View FanTweets" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>💬 FanTweet</Link></li>
+          <li><Link to="/connection" title="Your Connections" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🤝 Connection</Link></li>
+          <li><Link to="/notifications" title="Your Notifications" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔔 Notifications</Link></li>
+          <li><Link to="/settings" title="Account Settings" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>⚙️ Settings</Link></li>
+           <li><a onClick={handleLogout} title="Sign Out" className={`rounded-xl px-4 py-2 cursor-pointer ${theme === 'light' ? 'text-gray-800 hover:bg-red-200/50' : 'text-white hover:bg-red-500/20 hover:text-red-400'}`}>🚪 Logout</a></li>
+         </ul>
+       </div>
+     ) : (
+       <div className="flex gap-2">
+        
+       </div>
+     )}
+   </div>
+ </div>
+ 
+ <style jsx>{`
   @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
   
   [style*="font-family: cursive"] {
