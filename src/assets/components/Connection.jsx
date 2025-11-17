@@ -4,10 +4,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
 import { API_BASE_URL } from "../../config/api";
 import { authUtils } from "../../utils/auth";
+import { useTheme } from "../utils/ThemeContext";
 
 const Connection = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connection);
+  const { theme } = useTheme();
+
+  // Theme-specific styles
+  const themeStyles = {
+    dark: {
+      background: "bg-gradient-to-br from-gray-900 via-gray-800 to-black",
+      text: "text-white",
+      subtext: "text-gray-400",
+      card: "bg-gray-800/60 backdrop-blur-sm border-gray-700/50",
+      cardHover: "hover:shadow-blue-500/20 hover:border-gray-600/70",
+      statsBox: "bg-gray-800/60 border-gray-700/50",
+      emptyStateBox: "bg-gray-700/50 border-gray-600/50",
+      button: "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600"
+    },
+    light: {
+      background: "bg-gradient-to-br from-green-300 via-purple-200 to-pink-200",
+      text: "text-gray-900",
+      subtext: "text-purple-700",
+      card: "bg-white/80 backdrop-blur-sm border-purple-300/50 shadow-lg",
+      cardHover: "hover:shadow-purple-500/30 hover:border-purple-400/70",
+      statsBox: "bg-white/80 border-purple-300/50",
+      emptyStateBox: "bg-purple-100/50 border-purple-300/50",
+      button: "bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
+    }
+  };
+
+  const currentTheme = themeStyles[theme] || themeStyles.dark;
 
   const fetchConnections = async () => {
     try {
@@ -26,7 +54,7 @@ const Connection = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-3 sm:p-6">
+    <div className={`min-h-screen ${currentTheme.background} p-3 sm:p-6`}>
       {/* Custom Styles */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -66,17 +94,17 @@ const Connection = () => {
             My Connections
           </h1>
           <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
-          <p className="text-gray-400 mt-2 sm:mt-4 text-sm sm:text-base">Connect and chat with your network</p>
+          <p className={`${currentTheme.subtext} mt-2 sm:mt-4 text-sm sm:text-base`}>Connect and chat with your network</p>
         </div>
 
         {/* No Connections State */}
         {connections.length === 0 && (
           <div className="text-center py-12 sm:py-20">
-            <div className="w-16 sm:w-24 h-16 sm:h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 backdrop-blur-sm border border-gray-600/50 float-animation">
+            <div className={`w-16 sm:w-24 h-16 sm:h-24 ${currentTheme.emptyStateBox} rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 backdrop-blur-sm border float-animation`}>
               <span className="text-2xl sm:text-4xl">🤝</span>
             </div>
-            <h1 className="text-white text-xl sm:text-2xl font-semibold mb-2">No Connections Yet</h1>
-            <p className="text-gray-400 text-sm sm:text-base px-4">Start connecting with people to build your network!</p>
+            <h1 className={`${currentTheme.text} text-xl sm:text-2xl font-semibold mb-2`}>No Connections Yet</h1>
+            <p className={`${currentTheme.subtext} text-sm sm:text-base px-4`}>Start connecting with people to build your network!</p>
           </div>
         )}
 
@@ -89,7 +117,7 @@ const Connection = () => {
             return (
               <div
                 key={_id}
-                className="bg-gray-800/60 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-gray-700/50 p-4 sm:p-6 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:border-gray-600/70 hover:-translate-y-2 card-animation group"
+                className={`${currentTheme.card} rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-2xl ${currentTheme.cardHover} transition-all duration-300 hover:-translate-y-2 card-animation group`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Profile Section */}
@@ -100,18 +128,18 @@ const Connection = () => {
                       className="w-16 sm:w-20 h-16 sm:h-20 rounded-full object-cover ring-2 sm:ring-4 ring-blue-500/30 group-hover:ring-blue-400/50 transition-all duration-300 mx-auto"
                       src={photoUrl || "https://via.placeholder.com/150"}
                     />
-                    <div className="absolute -bottom-1 -right-1 w-5 sm:w-6 h-5 sm:h-6 bg-green-500 rounded-full border-2 border-gray-800 flex items-center justify-center">
+                    <div className={`absolute -bottom-1 -right-1 w-5 sm:w-6 h-5 sm:h-6 bg-green-500 rounded-full border-2 ${theme === 'light' ? 'border-white' : 'border-gray-800'} flex items-center justify-center`}>
                       <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white rounded-full"></div>
                     </div>
                   </div>
                   
-                  <h2 className="text-white font-bold text-base sm:text-lg mt-2 sm:mt-3 group-hover:text-blue-300 transition-colors duration-300">
+                  <h2 className={`${currentTheme.text} font-bold text-base sm:text-lg mt-2 sm:mt-3 group-hover:text-blue-500 transition-colors duration-300`}>
                     {firstname} {lastname}
                   </h2>
                   
                   {age && gender && (
                     <div className="mt-1 sm:mt-2">
-                      <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium text-blue-300 bg-blue-500/20 ring-1 ring-blue-400/30 rounded-full">
+                      <span className={`px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium ${theme === 'light' ? 'text-purple-700 bg-purple-200/50 ring-1 ring-purple-300' : 'text-blue-300 bg-blue-500/20 ring-1 ring-blue-400/30'} rounded-full`}>
                         {age}, {gender}
                       </span>
                     </div>
@@ -120,7 +148,7 @@ const Connection = () => {
 
                 {/* About Section */}
                 <div className="mb-4 sm:mb-6">
-                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed text-center line-clamp-2 sm:line-clamp-3 px-1">
+                  <p className={`${theme === 'light' ? 'text-gray-700' : 'text-gray-300'} text-xs sm:text-sm leading-relaxed text-center line-clamp-2 sm:line-clamp-3 px-1`}>
                     {about || "No description available"}
                   </p>
                 </div>
@@ -129,7 +157,7 @@ const Connection = () => {
                 <div className="flex justify-center">
                   <button
                     onClick={() => (window.location.href = `chat/${_id}`)}
-                    className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold rounded-lg sm:rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25 group-hover:shadow-purple-500/25 text-sm sm:text-base"
+                    className={`px-4 sm:px-6 py-2 sm:py-3 ${currentTheme.button} text-white font-semibold rounded-lg sm:rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base`}
                   >
                     <span className="hidden sm:inline">💬 Start Chat</span>
                     <span className="sm:hidden">💬 Chat</span>
@@ -148,11 +176,11 @@ const Connection = () => {
         {/* Connection Stats */}
         {connections.length > 0 && (
           <div className="mt-8 sm:mt-12 text-center">
-            <div className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gray-800/60 backdrop-blur-sm rounded-full border border-gray-700/50">
-              <span className="text-gray-400 text-xs sm:text-sm">
+            <div className={`inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 ${currentTheme.statsBox} backdrop-blur-sm rounded-full border`}>
+              <span className={`${currentTheme.subtext} text-xs sm:text-sm`}>
                 Total Connections: 
               </span>
-              <span className="ml-2 text-white font-semibold text-sm sm:text-base">
+              <span className={`ml-2 ${currentTheme.text} font-semibold text-sm sm:text-base`}>
                 {connections.length}
               </span>
               <span className="ml-2 text-blue-400">

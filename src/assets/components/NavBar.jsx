@@ -125,6 +125,12 @@ const NavBar = () => {
         <Link to="/connection" title="Your Connections" className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg">
           <span className="group-hover:animate-bounce">Connections</span>
         </Link>
+
+        {/* theme Icon */}
+        <Link to="/settings" title="Settings" className="group relative flex items-center justify-center text-l hover:scale-125 transition-all duration-300 hover:drop-shadow-lg">
+          <span className="group-hover:animate-bounce">Settings</span>
+        </Link>
+        
       </div>
     )}
   </div>
