@@ -107,7 +107,7 @@ useEffect(() => {
             <div className="w-24 h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm border border-gray-600/50">
               <span className="text-4xl">💼</span>
             </div>
-            <h1 className="text-white text-2xl font-semibold mb-2">No Requests Found</h1>
+            <h1 className="text-white text-2xl font-semibold mb-2">No More Requests</h1>
             <p className="text-gray-400">You're all caught up! No pending connection requests.</p>
           </div>
         )}
@@ -116,6 +116,12 @@ useEffect(() => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {requests && requests.map((request, index) => {
             const { _id, fromUserId } = request;
+            
+            // Skip if fromUserId is null (user deleted/not found)
+            if (!fromUserId) {
+              return null;
+            }
+            
             const { firstname, lastname, photoUrl, age, gender, about } = fromUserId;
             return (
               <div

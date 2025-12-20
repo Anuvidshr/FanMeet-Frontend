@@ -5,11 +5,13 @@ import { addConnection } from "../utils/connectionSlice";
 import { API_BASE_URL } from "../../config/api";
 import { authUtils } from "../../utils/auth";
 import { useTheme } from "../utils/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 const Connection = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connection);
   const { theme } = useTheme();
+  const navigate = useNavigate();
 
   // Theme-specific styles
   const themeStyles = {
@@ -117,7 +119,7 @@ const Connection = () => {
             return (
               <div
                 key={_id}
-                className={`${currentTheme.card} rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-2xl ${currentTheme.cardHover} transition-all duration-300 hover:-translate-y-2 card-animation group`}
+                className={`${currentTheme.card} rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-2xl ${currentTheme.cardHover} transition-all duration-300 hover:-translate-y-2 card-animation group flex flex-col`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Profile Section */}
@@ -147,16 +149,16 @@ const Connection = () => {
                 </div>
 
                 {/* About Section */}
-                <div className="mb-4 sm:mb-6">
+                <div className="mb-4 sm:mb-6 flex-grow">
                   <p className={`${theme === 'light' ? 'text-gray-700' : 'text-gray-300'} text-xs sm:text-sm leading-relaxed text-center line-clamp-2 sm:line-clamp-3 px-1`}>
                     {about || "No description available"}
                   </p>
                 </div>
 
                 {/* Action Button */}
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-auto">
                   <button
-                    onClick={() => (window.location.href = `chat/${_id}`)}
+                    onClick={() => navigate(`/chat/${_id}`)}
                     className={`px-4 sm:px-6 py-2 sm:py-3 ${currentTheme.button} text-white font-semibold rounded-lg sm:rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base`}
                   >
                     <span className="hidden sm:inline">💬 Start Chat</span>
@@ -175,8 +177,8 @@ const Connection = () => {
 
         {/* Connection Stats */}
         {connections.length > 0 && (
-          <div className="mt-8 sm:mt-12 text-center">
-            <div className={`inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 ${currentTheme.statsBox} backdrop-blur-sm rounded-full border`}>
+          <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className={`inline-flex items-center px-4 sm:px-6 py-3 ${currentTheme.statsBox} backdrop-blur-sm rounded-full border`}>
               <span className={`${currentTheme.subtext} text-xs sm:text-sm`}>
                 Total Connections: 
               </span>
@@ -187,6 +189,13 @@ const Connection = () => {
                 🔗
               </span>
             </div>
+            
+            <button
+              onClick={() => navigate('/Request')}
+              className={`px-6 sm:px-8 py-3 ${currentTheme.button} text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-xs sm:text-sm hover:scale-105`}
+            >
+              📬 View Requests
+            </button>
           </div>
         )}
       </div>

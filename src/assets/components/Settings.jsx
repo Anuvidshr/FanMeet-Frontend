@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../utils/ThemeContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../../config/api';
+import { authUtils } from '../../utils/auth';
+import { removeUser } from '../utils/userSlice';
 
 const Settings = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { theme, setThemeMode } = useTheme();
   
   // State for different settings
@@ -25,11 +31,9 @@ const Settings = () => {
     allowMessages: 'everyone'
   });
 
-  const [appearance, setAppearance] = useState({
-    fontSize: 'medium'
-  });
-
   const [activeTab, setActiveTab] = useState('account');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState('');
 
   const handleNotificationToggle = (key) => {
     setNotifications(prev => ({ ...prev, [key]: !prev[key] }));
@@ -39,9 +43,28 @@ const Settings = () => {
     setPrivacy(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleAppearanceChange = (key, value) => {
-    setAppearance(prev => ({ ...prev, [key]: value }));
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmText !== 'DELETE') {
+      toast.error('Please type DELETE to confirm');
+      return;
+    }
+
+    try {
+      await axios.delete(`${API_BASE_URL}/profile/delete`, {
+        withCredentials: true,
+        headers: authUtils.getAuthHeaders()
+      });
+      
+      toast.success('Account deleted successfully');
+      dispatch(removeUser());
+      localStorage.clear();
+      navigate('/login');
+    } catch (error) {
+      console.error('Delete account error:', error);
+      toast.error('Failed to delete account. Please try again.');
+    }
   };
+
 
   const themes = [
     { 
@@ -93,30 +116,6 @@ const Settings = () => {
               >
                 <span className="text-xl">👤</span>
                 <span className="font-medium">Account</span>
-              </button>
-              
-              <button
-                onClick={() => setActiveTab('privacy')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all flex items-center gap-3 mt-2 ${
-                  activeTab === 'privacy' 
-                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' 
-                    : 'text-gray-400 hover:bg-white/5'
-                }`}
-              >
-                <span className="text-xl">🔒</span>
-                <span className="font-medium">Privacy</span>
-              </button>
-              
-              <button
-                onClick={() => setActiveTab('notifications')}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all flex items-center gap-3 mt-2 ${
-                  activeTab === 'notifications' 
-                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' 
-                    : 'text-gray-400 hover:bg-white/5'
-                }`}
-              >
-                <span className="text-xl">🔔</span>
-                <span className="font-medium">Notifications</span>
               </button>
               
               <button
@@ -379,45 +378,6 @@ const Settings = () => {
                         ))}
                       </div>
                     </div>
-
-                    {/* Font Size */}
-                    <div>
-                      <label className="text-white font-medium mb-3 block">Font Size</label>
-                      <div className="grid grid-cols-3 gap-4">
-                        <button
-                          onClick={() => handleAppearanceChange('fontSize', 'small')}
-                          className={`p-4 rounded-lg border-2 transition-all ${
-                            appearance.fontSize === 'small'
-                              ? 'border-blue-500 bg-blue-500/10'
-                              : 'border-gray-700 bg-white/5 hover:bg-white/10'
-                          }`}
-                        >
-                          <div className="text-white font-medium text-sm">Small</div>
-                        </button>
-                        
-                        <button
-                          onClick={() => handleAppearanceChange('fontSize', 'medium')}
-                          className={`p-4 rounded-lg border-2 transition-all ${
-                            appearance.fontSize === 'medium'
-                              ? 'border-blue-500 bg-blue-500/10'
-                              : 'border-gray-700 bg-white/5 hover:bg-white/10'
-                          }`}
-                        >
-                          <div className="text-white font-medium text-base">Medium</div>
-                        </button>
-                        
-                        <button
-                          onClick={() => handleAppearanceChange('fontSize', 'large')}
-                          className={`p-4 rounded-lg border-2 transition-all ${
-                            appearance.fontSize === 'large'
-                              ? 'border-blue-500 bg-blue-500/10'
-                              : 'border-gray-700 bg-white/5 hover:bg-white/10'
-                          }`}
-                        >
-                          <div className="text-white font-medium text-lg">Large</div>
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               )}
@@ -430,28 +390,6 @@ const Settings = () => {
                   </h2>
                   
                   <div className="space-y-6">
-                    {/* Change Password */}
-                    <div className="p-6 bg-white/5 rounded-lg border border-gray-700">
-                      <h3 className="text-white font-semibold text-lg mb-2 flex items-center gap-2">
-                        🔑 Change Password
-                      </h3>
-                      <p className="text-gray-400 mb-4">Update your password to keep your account secure</p>
-                      <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition-all">
-                        Change Password
-                      </button>
-                    </div>
-
-                    {/* Two-Factor Authentication */}
-                    <div className="p-6 bg-white/5 rounded-lg border border-gray-700">
-                      <h3 className="text-white font-semibold text-lg mb-2 flex items-center gap-2">
-                        📱 Two-Factor Authentication
-                      </h3>
-                      <p className="text-gray-400 mb-4">Add an extra layer of security to your account</p>
-                      <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg transition-all">
-                        Enable 2FA
-                      </button>
-                    </div>
-
                     {/* Active Sessions */}
                     <div className="p-6 bg-white/5 rounded-lg border border-gray-700">
                       <h3 className="text-white font-semibold text-lg mb-2 flex items-center gap-2">
@@ -478,7 +416,10 @@ const Settings = () => {
                         ⚠️ Danger Zone
                       </h3>
                       <p className="text-gray-400 mb-4">Permanently delete your account and all data</p>
-                      <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition-all">
+                      <button 
+                        onClick={() => setShowDeleteModal(true)}
+                        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition-all"
+                      >
                         Delete Account
                       </button>
                     </div>
@@ -490,6 +431,48 @@ const Settings = () => {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 border border-red-500/50 rounded-2xl p-6 max-w-md w-full">
+            <h2 className="text-2xl font-bold text-red-400 mb-4 flex items-center gap-2">
+              ⚠️ Delete Account
+            </h2>
+            <p className="text-gray-300 mb-4">
+              This action cannot be undone. This will permanently delete your account and remove all your data from our servers.
+            </p>
+            <p className="text-gray-400 mb-4 text-sm">
+              Type <span className="text-red-400 font-bold">DELETE</span> to confirm:
+            </p>
+            <input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              placeholder="Type DELETE"
+              className="w-full bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-white mb-6 focus:border-red-500 outline-none"
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setDeleteConfirmText('');
+                }}
+                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteAccount}
+                disabled={deleteConfirmText !== 'DELETE'}
+                className="flex-1 bg-red-500 hover:bg-red-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-all"
+              >
+                Delete Forever
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

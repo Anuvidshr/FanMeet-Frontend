@@ -164,7 +164,7 @@ const NavBar = () => {
           <li><Link to="/explore" title="Explore FanMeet" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔍 Explore</Link></li>
           <li><Link to="/fantweet" title="View FanTweets" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>💬 FanTweet</Link></li>
           <li><Link to="/connection" title="Your Connections" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🤝 Connection</Link></li>
-          <li><Link to="/notifications" title="Your Notifications" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔔 Notifications</Link></li>
+          <li><Link to="/Request" title="View Requests" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>🔗 Requests</Link></li>
           <li><Link to="/settings" title="Account Settings" className={`rounded-xl px-4 py-2 ${theme === 'light' ? 'text-gray-800 hover:bg-green-200/70' : 'text-white hover:bg-gray-700/70'}`}>⚙️ Settings</Link></li>
            <li><a onClick={handleLogout} title="Sign Out" className={`rounded-xl px-4 py-2 cursor-pointer ${theme === 'light' ? 'text-gray-800 hover:bg-red-200/50' : 'text-white hover:bg-red-500/20 hover:text-red-400'}`}>🚪 Logout</a></li>
          </ul>

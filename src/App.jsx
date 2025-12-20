@@ -16,6 +16,7 @@ import FanTweet from "./assets/components/FanTweet";
 import Settings from "./assets/components/Settings";
 import Hp from "./fandomPages/Hp";
 import Cricket from "./fandomPages/Cricket";
+import Anime from "./fandomPages/Anime";
 import { ThemeProvider } from "./assets/utils/ThemeContext";
 
 //kumar sanu   //udit narayan 
@@ -53,10 +54,11 @@ function App(){
               <Route path="Request" element={<Request/>}/>
               <Route path="Chat/:toUserId" element={<Chat/>}/>
               <Route path="about" element={<About/>}/>
-              <Route path="fandom/a" element={<Hp/>}/>
-              <Route path="fandom/f" element={<Cricket/>}/>
-
           </Route>
+          {/* Fandom Routes - outside Body for clean full-screen */}
+          <Route path="/fandom/a" element={<Hp/>}/>
+          <Route path="/fandom/f" element={<Cricket/>}/>
+          <Route path="/fandom/anime" element={<Anime/>}/>
        </Routes>
       </BrowserRouter>
       </ThemeProvider>

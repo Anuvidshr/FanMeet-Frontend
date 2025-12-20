@@ -48,10 +48,12 @@ const Login = () => {
 
       setTimeout(() => {
         const user = res.data.user;
-        if (user.photoUrl === "" || user.isFirstTime) {
+        // Check if user needs to complete profile setup
+        if (!user.photoUrl || user.isFirstTime) {
           navigate("/Profile");
         } else {
-          navigate("/feed");
+          // Existing users go directly to homepage
+          navigate("/homepage");
         }
       }, 500); // Wait a bit so user sees the toast
     } catch (err) {

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 // Fandom Images
 import hpImage from '../../Images/hp.png';
 import animeImage from '../../Images/anime.png';
@@ -10,12 +11,12 @@ const Explore = () => {
   const itemsPerPage = 6; 
 
   const fandoms = [
-  { id: 'A', name: 'HARRY POTTER', description: 'Hey Wizard and Witches! Step into the wizarding world where magic, friendship, and destiny collide.', image: hpImage, members: '12.5K', color: 'from-blue-500 to-purple-600' },
-  { id: 'B', name: 'ANIME', description: 'Hey fellow freak! Dive into worlds of imagination, emotion, and epic storytelling.', image: animeImage, members: '8.2K', color: 'from-red-500 to-pink-600' },
+  { id: 'a', name: 'HARRY POTTER', description: 'Hey Wizard and Witches! Step into the wizarding world where magic, friendship, and destiny collide.', image: hpImage, members: '12.5K', color: 'from-blue-500 to-purple-600' },
+  { id: 'anime', name: 'ANIME', description: 'Hey fellow freak! Dive into worlds of imagination, emotion, and epic storytelling.', image: animeImage, members: '8.2K', color: 'from-red-500 to-pink-600' },
   { id: 'C', name: 'MARVEL(MCU)', description: 'Hey Superhero! Heroes unite to save worlds and redefine destiny across the multiverse.', image: 'https://via.placeholder.com/400x300/10b981/ffffff?text=MARVEL', members: '15.3K', color: 'from-green-500 to-teal-600' },
   { id: 'D', name: 'BOLLYWOOD', description: 'Hey Film Buff! Lights, music, drama—experience the heartbeat of Indian cinema.', image: 'https://via.placeholder.com/400x300/f59e0b/ffffff?text=BOLLYWOOD', members: '22.1K', color: 'from-yellow-500 to-orange-600' },
   { id: 'E', name: 'F.R.I.E.N.D.S', description: 'Hey Coffee Lover! Laugh, cry, and sip coffee with the most iconic friend group ever.', image: 'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=FRIENDS', members: '9.7K', color: 'from-purple-500 to-indigo-600' },
-  { id: 'F', name: 'MS-DHONI', description: 'Hey Cricket Fan! Celebrate the calm, composed, and legendary Captain Cool of cricket.', image: 'https://via.placeholder.com/400x300/06b6d4/ffffff?text=MS-DHONI', members: '18.9K', color: 'from-cyan-500 to-blue-600' },
+  { id: 'f', name: 'MS-DHONI', description: 'Hey Cricket Fan! Celebrate the calm, composed, and legendary Captain Cool of cricket.', image: 'https://via.placeholder.com/400x300/06b6d4/ffffff?text=MS-DHONI', members: '18.9K', color: 'from-cyan-500 to-blue-600' },
   { id: 'G', name: 'DISNEY', description: 'Hey Dreamer! Where dreams, laughter, and timeless stories come alive.', image: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=DISNEY', members: '11.4K', color: 'from-pink-500 to-rose-600' },
   { id: 'H', name: 'WEB SERIES', description: 'Hey Binge-Watcher! Binge-worthy stories that keep you hooked till the very end.', image: 'https://via.placeholder.com/400x300/f97316/ffffff?text=WEB+SERIES', members: '25.6K', color: 'from-orange-500 to-red-600' },
   { id: 'I', name: 'NOVELS', description: 'Hey Bookworm! Lose yourself in words that build worlds and stir emotions.', image: 'https://via.placeholder.com/400x300/059669/ffffff?text=NOVELS', members: '7.8K', color: 'from-emerald-500 to-green-600' },
@@ -153,13 +154,13 @@ const Explore = () => {
                   <span className="text-gray-500 text-sm">
                     👥 {fandom.members} members
                   </span>
-                  <a 
-                    href={`/fandom/${fandom.id.toLowerCase()}`}
+                  <Link 
+                    to={`/fandom/${fandom.id}`}
                     className="text-purple-400 text-sm font-medium group-hover:text-purple-300 hover:underline"
                     onClick={(e) => e.stopPropagation()}
                   >
                     Explore →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
